@@ -1,7 +1,13 @@
+'use client';
+
+import { signOut, useSession } from 'next-auth/react';
+import LoginButton from '../LoginButton';
 import styles from './styles.module.css';
 import Link from 'next/link';
 
-export function Header() {
+const Header = () => {
+  const { data: session, status } = useSession();
+
   return (
     <header className={styles.header}>
       <section className={styles.content}>
@@ -17,8 +23,18 @@ export function Header() {
           </Link>
         </nav>
 
-        <button className={styles.loginButton}>Acessar</button>
+        {status === 'loading' ? (
+          <></>
+        ) : session ? (
+          <button className={styles.loginButton} onClick={() => signOut()}>
+            Olá, {session?.user?.name}
+          </button>
+        ) : (
+          <LoginButton title={'Acessar'} className={styles.loginButton} />
+        )}
       </section>
     </header>
   );
-}
+};
+
+export default Header;

@@ -37,6 +37,9 @@
   color: #fff;
   border: 1.5px solid #fff;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .loginButton:hover {
