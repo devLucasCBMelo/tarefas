@@ -18,9 +18,11 @@ const Header = () => {
             </h1>
           </Link>
 
-          <Link href={'/dashboard'} className={styles.link}>
-            Meu Painel
-          </Link>
+          {session?.user && (
+            <Link href={'/dashboard'} className={styles.link}>
+              Meu Painel
+            </Link>
+          )}
         </nav>
 
         {status === 'loading' ? (
